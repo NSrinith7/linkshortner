@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Link Shortener</h1>
+        <input type="text" id="originalLink" placeholder="Enter your long URL">
+        <button onclick="shortenLink()">Shorten</button>
+        <p id="shortenedLink"></p>
+    </div>
+    <script>
+        // Define a JSON object to store shortened links
+        const linkDatabase = {};
+
+        function shortenLink() {
+            const originalLink = document.getElementById('originalLink').value;
+            const shortenedLink = generateShortLink();
+
+            // Store the mapping of shortened link to original link in the JSON object
+            linkDatabase[shortenedLink] = originalLink;
+
+            // Display the shortened link to the user
+            document.getElementById('shortenedLink').innerHTML = `
+                Shortened Link: <a href="${shortenedLink}" target="_blank">${shortenedLink}</a>
+            `;
+        }
+
+        function generateShortLink() {
+            // This is a simple example, and you can implement a more sophisticated algorithm for generating short links.
+            // In practice, you would use a backend server for this purpose.
+            return 'http://example.com/' + Math.random().toString(36).substring(2, 8);
+        }
+    </script>
+</body>
+</html>
